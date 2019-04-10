@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 v-text="title" />
+    <v-divider class="mb-4"/>
+    <template v-for="(item, index) in resources">
+      <v-divider :key="index + 'divider'" class="mb-5" v-if="index > 0"/>
+      <resource
+        :key="index"
+        :value="item"
+      />
+    </template>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapState } from 'vuex'
+import resource from '../components/resource'
 export default {
-  name: 'home',
   components: {
-    HelloWorld
+    resource
+  },
+  computed: {
+    ...mapState(['resources', 'title'])
   }
 }
 </script>
+
+<style>
+.home {
+  margin-top: 6px;
+  margin-bottom: 500px;
+}
+</style>

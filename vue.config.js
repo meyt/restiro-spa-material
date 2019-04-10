@@ -1,3 +1,5 @@
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+  outputDir: 'restiro_spa_material/dist',
+  publicPath: './'
 }
