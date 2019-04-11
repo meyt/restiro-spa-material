@@ -21,7 +21,7 @@ before_install:
 install:
   - npm install
   - npm run build
-  - pip install -U pip setuptools wheel
+  - pip3 install -U pip setuptools wheel
 
 deploy:
   provider: pypi
