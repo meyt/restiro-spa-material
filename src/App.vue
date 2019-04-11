@@ -1,15 +1,5 @@
 <template>
   <v-app>
-    <!-- <v-toolbar app dense>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
-
-      <v-toolbar-title class="headline text-uppercase">
-        <span v-text="title" />
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-    </v-toolbar> -->
-
     <v-navigation-drawer
       fixed
       v-model="drawer"
