@@ -17,11 +17,11 @@ branches:
 before_install:
   - sudo apt-get update
   - sudo apt-get install python3
+  - pip3.6 install -U pip setuptools wheel
 
 install:
   - npm install
   - npm run build
-  - pip3 install -U pip setuptools wheel
 
 deploy:
   provider: pypi
