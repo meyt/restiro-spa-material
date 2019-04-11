@@ -14,7 +14,7 @@ branches:
 install:
   - npm install
   - npm run build
-  - pip install --upgrade six
+  - pip install -U pip setuptools wheel
 
 deploy:
   provider: pypi
