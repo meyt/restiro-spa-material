@@ -107,7 +107,7 @@ export default {
     await this.$store.dispatch('loadIndex')
     this.$vuetify.lang.current = this.locale.split('_')[0]
     this.$vuetify.rtl = this.isRtl
-    updateFavicon('/restiro.png')
+    updateFavicon('./restiro.png')
   },
   methods: {
     capitalize,
