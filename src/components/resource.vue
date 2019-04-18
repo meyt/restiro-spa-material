@@ -44,9 +44,7 @@
               </div>
             </v-flex>
             <v-flex sm12 md10 class="py-1">
-              <div v-if="item.description">
-                {{ marked(item.description) }}
-              </div>
+              <div v-if="item.description" v-html="marked(item.description)" />
               <div v-if="item.example">
                 Example: {{ item.example }}
               </div>
