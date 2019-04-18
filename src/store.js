@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     title: '',
     resources: [],
-    locale: '',
+    locale: 'en_US',
     keyword: '',
     section: ''
   },
@@ -58,7 +58,7 @@ export default new Vuex.Store({
       const docs = window.restiro_docs
       commit('SET_TITLE', docs.title)
       commit('SET_RESOURCES', docs.resources)
-      commit('SET_LOCALE', docs.locale)
+      if (docs.locale) commit('SET_LOCALE', docs.locale)
       return Promise.resolve(true)
     }
   }

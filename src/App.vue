@@ -105,7 +105,9 @@ export default {
   },
   async mounted () {
     await this.$store.dispatch('loadIndex')
-    this.$vuetify.lang.current = this.locale.split('_')[0]
+    this.$vuetify.lang.current = this.locale
+      ? this.locale.split('_')[0]
+      : 'en'
     this.$vuetify.rtl = this.isRtl
     updateFavicon('./restiro.png')
     this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
