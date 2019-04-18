@@ -108,6 +108,7 @@ export default {
     this.$vuetify.lang.current = this.locale.split('_')[0]
     this.$vuetify.rtl = this.isRtl
     updateFavicon('./restiro.png')
+    this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
   },
   methods: {
     capitalize,

@@ -1,14 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import rtlDetect from 'rtl-detect'
-import * as Axios from 'axios'
 
 Vue.use(Vuex)
-
-const axios = Axios.create({
-  baseURL: './',
-  timeout: 1000
-})
 
 export default new Vuex.Store({
   state: {
@@ -60,11 +54,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async loadIndex ({ commit, dispatch }) {
-      const response = await axios.get('docs.json')
-      commit('SET_TITLE', response.data.title)
-      commit('SET_RESOURCES', response.data.resources)
-      commit('SET_LOCALE', response.data.locale)
+    loadIndex ({ commit, dispatch }) {
+      const docs = window.restiro_docs
+      commit('SET_TITLE', docs.title)
+      commit('SET_RESOURCES', docs.resources)
+      commit('SET_LOCALE', docs.locale)
+      return Promise.resolve(true)
     }
   }
 })

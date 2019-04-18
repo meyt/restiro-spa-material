@@ -23,8 +23,10 @@ class SPAGenerator(BaseGenerator):
         assets_dir = join(this_dir, 'dist')
         copy(assets_dir, self.destination_dir)
 
-        f = self._ensure_file('docs.json')
-        f.write(json.dumps(self.docs_root.to_dict()))
+        f = self._ensure_file('docs.js')
+        f.write(
+            'window.restiro_docs = %s' % json.dumps(self.docs_root.to_dict())
+        )
         f.close()
 
     def generate_documents(self):
