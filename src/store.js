@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import sortBy from 'lodash/sortBy'
 import rtlDetect from 'rtl-detect'
 
 Vue.use(Vuex)
@@ -13,9 +14,9 @@ export default new Vuex.Store({
     section: ''
   },
   getters: {
-    groupedResources (state) {
+    groupedResources (state, getters) {
       const resultByGroup = {}
-      state.resources.forEach((resource) => {
+      getters.sortedResources.forEach((resource) => {
         // Filter by keyword
         if (
           state.keyword.length > 0 &&
@@ -31,6 +32,9 @@ export default new Vuex.Store({
         }
       })
       return resultByGroup
+    },
+    sortedResources (state) {
+      return sortBy(state.resources, ['display_name'])
     },
     isRtl (state) {
       return rtlDetect.isRtlLang(state.locale)
