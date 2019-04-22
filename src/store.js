@@ -11,7 +11,8 @@ export default new Vuex.Store({
     resources: [],
     locale: 'en_US',
     keyword: '',
-    section: ''
+    section: '',
+    isDark: false
   },
   getters: {
     groupedResources (state, getters) {
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     },
     SET_KEYWORD (state, data) {
       state.keyword = data
+    },
+    SET_IS_DARK (state, data) {
+      state.isDark = data
     }
   },
   actions: {

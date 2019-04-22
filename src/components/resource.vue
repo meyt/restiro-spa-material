@@ -23,7 +23,7 @@
         <v-chip small :color="methodColor" dark class="mx-0">
           <b v-text="value.method.toUpperCase()"/>
         </v-chip>
-        <v-sheet color="grey lighten-3 px-2 py-2 mb-4" >
+        <v-sheet :class="{'grey lighten-3': !isDark, 'px-2 py-2 mb-4': true}" >
           <div>
             <span v-text="value.path" />
           </div>
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import marked from 'marked'
 import example from './example'
 import { getResourceAnchor, getMethodColor, jumpToSection } from '../helpers'
@@ -117,6 +118,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['isDark']),
     description () {
       if (!this.value.description) return ''
       return marked(this.value.description)

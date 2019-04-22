@@ -1,7 +1,14 @@
+.theme--dark
+  a, h1, h2, h3, h4, h5, h6, p
+    color: #ccc
+
+  code
+    background-color: #181818;
+    color: #c50054;
 
 pre
   background: #f4f4f4;
-  border: 1px solid #ddd;
+  border: none;
   border-left: 3px solid #f36d33;
   color: #333;
   page-break-inside: avoid;
@@ -21,3 +28,14 @@ pre
     font-weight: normal;
     font-size: 11px;
 
+.theme--dark
+  pre
+    background-color: #666
+    color: #eee
+    code
+      background-color: #666
+      color: #eee
+
+.application--is-rtl
+  pre, code
+    direction: ltr

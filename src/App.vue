@@ -1,12 +1,12 @@
 <template>
-  <v-app>
+  <v-app :dark="isDark">
     <v-navigation-drawer
       fixed
       v-model="drawer"
       :left="!isRtl"
       :right="isRtl"
       app
-      class="grey lighten-4"
+      :class="{'grey lighten-4': !isDark}"
     >
       <v-text-field v-model="keyword" placeholder="Search..." class="mx-3"/>
       <v-list dense >
@@ -33,6 +33,9 @@
           </v-list-tile>
         </v-list-group>
       </v-list>
+      <div class="px-3">
+        <v-switch v-model="isDarkLocal" append-icon="brightness_4" />
+      </div>
     </v-navigation-drawer>
 
     <v-content>
@@ -52,19 +55,24 @@ export default {
   name: 'App',
   data () {
     return {
+      isDarkLocal: this.isDark,
       drawer: true
     }
   },
   watch: {
     '$route.params' (newVal) {
       this.$store.commit('SET_SECTION', newVal.sectionName)
+    },
+    isDarkLocal (newVal) {
+      this.$store.commit('SET_IS_DARK', newVal)
     }
   },
   computed: {
     ...mapState([
       'title',
       'section',
-      'locale'
+      'locale',
+      'isDark'
     ]),
     ...mapGetters([
       'groupedResources',
