@@ -12,14 +12,25 @@
     </v-toolbar>
     <v-divider v-if="expanded"/>
     <v-card-text v-if="expanded" >
-      <div v-if="requestHeaders" class="mb-2">
-        <div class="caption">Headers</div>
+      <div>
+        Request:
+      </div>
+      <div v-if="requestHeaders" class="mb-2" title="Headers">
         <pre v-text="requestHeaders" />
       </div>
 
-      <div v-if="requestBody" class="mb-2">
-        <div class="caption">Body</div>
+      <div v-if="requestBody" class="mb-2" title="Body">
         <pre v-text="requestBody" />
+      </div>
+
+      <div>
+        Response:
+      </div>
+      <div v-if="responseHeaders" class="mb-2" title="Headers">
+        <pre v-text="responseHeaders" />
+      </div>
+      <div v-if="responseBody" class="mb-2" title="Body">
+        <pre v-text="responseBody" />
       </div>
     </v-card-text>
   </v-card>
@@ -55,6 +66,20 @@ export default {
         return JSON.parse(this.value.request.body_text)
       }
       return this.value.request.body_text
+    },
+    responseHeaders () {
+      const result = []
+      const headers = this.value.response.headers
+      Object.keys(headers).forEach((key) => {
+        result.push(`${key}: ${headers[key]}`)
+      })
+      return result.join('\n')
+    },
+    responseBody () {
+      if (this.value.response.body_format === 'json') {
+        return JSON.parse(this.value.response.body)
+      }
+      return this.value.response.body
     }
   }
 }
