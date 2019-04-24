@@ -29,6 +29,14 @@
           </div>
         </v-sheet>
 
+        <!-- Permissions -->
+        <div v-if="value.security">
+          <span v-for="(securityKey, index) in Object.keys(value.security)" :key="index">
+            {{ securityKey }}:
+            {{ value.security[securityKey].join(', ') }}
+          </span>
+        </div>
+
         <!-- Parameters -->
         <div
           v-for="(paramType, index) in paramTypes"
