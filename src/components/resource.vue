@@ -81,7 +81,7 @@
         <!-- Examples -->
         <div v-if="value.examples.length > 0" class="resource-examples">
           <example
-            v-for="(example, index) in value.examples"
+            v-for="(example, index) in examples"
             :key="index"
             :value="example"
             :expandedDefault="index === 0" />
@@ -96,6 +96,7 @@ import { mapState } from 'vuex'
 import marked from 'marked'
 import example from './example'
 import capitalize from 'lodash/capitalize'
+import sortBy from 'lodash/sortBy'
 import { getResourceAnchor, getMethodColor, jumpToSection } from '../helpers'
 
 const paramTypes = [
@@ -150,6 +151,12 @@ export default {
     },
     methodColor () {
       return getMethodColor(this.value.method)
+    },
+    examples () {
+      return sortBy(
+        this.value.examples,
+        function (o) { return parseInt(o.response.status) }
+      )
     }
   },
   methods: {
