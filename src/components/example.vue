@@ -76,10 +76,10 @@ export default {
       return result.join('\n')
     },
     responseBody () {
-      if (this.value.response.body_format === 'json') {
-        return JSON.parse(this.value.response.body)
-      }
-      return this.value.response.body
+      const body = this.value.response.body
+      if (!body) return
+      if (this.value.response.body_format !== 'json') return body
+      return JSON.parse(body)
     }
   }
 }
