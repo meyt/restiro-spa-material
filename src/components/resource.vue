@@ -30,7 +30,7 @@
         </v-sheet>
 
         <!-- Permissions -->
-        <div v-if="value.security">
+        <div v-if="hasPermissions">
           <span v-for="(securityKey, index) in Object.keys(value.security)" :key="index">
             {{ securityKey }}:
             {{ value.security[securityKey].join(', ') }}
@@ -133,6 +133,10 @@ export default {
     },
     anchor () {
       return getResourceAnchor(this.value)
+    },
+    hasPermissions () {
+      const values = Object.values(this.value.security)
+      return this.value.security && values.length > 0 && values[0].length > 0
     },
     paramTypes () {
       const result = []
