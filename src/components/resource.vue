@@ -30,9 +30,9 @@
         </v-sheet>
 
         <!-- Permissions -->
-        <div v-if="hasPermissions">
+        <div v-if="hasPermissions" class="my-4">
           <span v-for="(securityKey, index) in Object.keys(value.security)" :key="index">
-            {{ securityKey }}:
+            {{ capitalize(securityKey) }}:
             {{ value.security[securityKey].join(', ') }}
           </span>
         </div>
@@ -95,6 +95,7 @@
 import { mapState } from 'vuex'
 import marked from 'marked'
 import example from './example'
+import capitalize from 'lodash/capitalize'
 import { getResourceAnchor, getMethodColor, jumpToSection } from '../helpers'
 
 const paramTypes = [
@@ -152,6 +153,7 @@ export default {
     }
   },
   methods: {
+    capitalize,
     marked,
     jumpToSection
   }
