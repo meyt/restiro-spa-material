@@ -15,6 +15,9 @@
       <div>
         Request:
       </div>
+
+      <div class="my-2" v-text="value.request.path" />
+
       <div v-if="requestHeaders" class="mb-2" title="Headers">
         <pre v-text="requestHeaders" />
       </div>
