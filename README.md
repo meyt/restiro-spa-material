@@ -7,21 +7,21 @@ Default [restiro](https://github.com/meyt/restiro) SPA template.
 *Based on [Material Design](https://material.io) specs.*
 
 
+## Usage
 
-## Setup
+```
+pip install restiro-spa-material
+```
+
+## Contribution
+
+### Setup
 ```
 npm install
 ```
 
-### Usage
-
-Development:
+### Development
 
 ```
 npm run serve
-```
-
-Release build:
-```
-npm run build
 ```
