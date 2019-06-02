@@ -18,7 +18,7 @@
           <template v-slot:activator>
             <v-list-tile>
               <v-list-tile-content>
-                <v-list-tile-title>{{ capitalize(group.title) }}</v-list-tile-title>
+                <v-list-tile-title>{{ formatGroupTitle(group.title) }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </template>
@@ -48,7 +48,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import capitalize from 'lodash/capitalize'
+import split from 'lodash/split'
 import { getResourceAnchor, updateFavicon, jumpToSection } from './helpers'
 
 export default {
@@ -121,7 +121,9 @@ export default {
     this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
   },
   methods: {
-    capitalize,
+    formatGroupTitle (title) {
+      return split(title, /(?=[A-Z])/g).join(' ')
+    },
     jumpToSection
   }
 }
