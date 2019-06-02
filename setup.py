@@ -10,6 +10,9 @@ setup(
     name='restiro-spa-material',
     version=version,
     author='Mahdi Ghane.g',
+    description='Restiro SPA Material template',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     keywords='restiro, extension, http, rest, documentation',
     install_requires=[
         'restiro'
