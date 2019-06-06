@@ -12,7 +12,7 @@ export function getMethodColor (method) {
 }
 
 export function getResourceAnchor (resource) {
-  return resource.tags[0] + '_' + resource.display_name.replace(/\s/g, '-')
+  return resource.tags[0] + '_' + resource.display_name.replace(/[^0-9A-Za-z\-_]/g, '-')
 }
 
 export function updateFavicon (src) {
