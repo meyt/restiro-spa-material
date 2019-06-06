@@ -12,7 +12,7 @@ export function getMethodColor (method) {
 }
 
 export function getResourceAnchor (resource) {
-  return resource.display_name.replace(/\s/g, '-')
+  return resource.tags[0] + '_' + resource.display_name.replace(/\s/g, '-')
 }
 
 export function updateFavicon (src) {
@@ -22,10 +22,4 @@ export function updateFavicon (src) {
   link.rel = 'shortcut icon'
   link.href = src
   document.head.appendChild(link)
-}
-
-export function jumpToSection (anchor) {
-  var element = window.document.querySelector('#' + anchor)
-  var top = element.offsetTop
-  window.scrollTo(0, top)
 }

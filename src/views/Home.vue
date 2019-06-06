@@ -2,12 +2,13 @@
   <div class="home">
     <h1 v-text="pageTitle" />
     <v-divider class="mb-4"/>
-    <template v-for="group in Object.keys(groupedResources).sort()">
+    <template v-for="(group) in Object.keys(groupedResources).sort()">
       <template v-for="(item, index) in groupedResources[group]">
-        <v-divider :key="index + 'divider'" class="mb-5" v-if="index > 0"/>
+        <v-divider :key="item.id + 'divider'" class="mb-5" v-if="index > 0"/>
         <resource
-          :key="index"
+          :key="item.id"
           :value="item"
+          :observableItemId="parseInt(item.id)"
         />
       </template>
     </template>

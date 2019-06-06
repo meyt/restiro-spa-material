@@ -97,7 +97,9 @@ import marked from 'marked'
 import example from './example'
 import capitalize from 'lodash/capitalize'
 import sortBy from 'lodash/sortBy'
-import { getResourceAnchor, getMethodColor, jumpToSection } from '../helpers'
+import { getResourceAnchor, getMethodColor } from '../helpers'
+import intersectionObserverMixin from '../mixins/intersection-observer'
+import sectionScrollMixin from '../mixins/section-scroll'
 
 const paramTypes = [
   'header_params',
@@ -117,6 +119,7 @@ export default {
   components: {
     example
   },
+  mixins: [sectionScrollMixin, intersectionObserverMixin],
   props: {
     value: {
       type: Object
@@ -161,8 +164,7 @@ export default {
   },
   methods: {
     capitalize,
-    marked,
-    jumpToSection
+    marked
   }
 }
 </script>

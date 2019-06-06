@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import sortBy from 'lodash/sortBy'
 import rtlDetect from 'rtl-detect'
-
+import { getViewportFocusItemId } from './mixins/intersection-observer'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +12,8 @@ export default new Vuex.Store({
     locale: 'en_US',
     keyword: '',
     section: '',
+    lastVisibleItemId: [], // Used for intersection observer on lists
+    viewportFocusItemId: null,
     isDark: false
   },
   getters: {
@@ -43,6 +45,10 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_RESOURCES (state, data) {
+      // Set internal ID (for navigation)
+      data.forEach((item, index) => {
+        item.id = index
+      })
       state.resources = data
     },
     SET_TITLE (state, data) {
@@ -59,6 +65,20 @@ export default new Vuex.Store({
     },
     SET_IS_DARK (state, data) {
       state.isDark = data
+    },
+    APPEND_LAST_VISIBLE_ITEM_ID (state, data) {
+      state.lastVisibleItemId.push(data)
+      state.viewportFocusItemId = getViewportFocusItemId(state.lastVisibleItemId)
+    },
+    DELETE_FROM_LAST_VISIBLE_ITEM_ID (state, data) {
+      const index = state.lastVisibleItemId.indexOf(data)
+      if (index === -1) return
+      state.lastVisibleItemId.splice(index, 1)
+      state.viewportFocusItemId = getViewportFocusItemId(state.lastVisibleItemId)
+    },
+    CLEAR_LAST_VISIBLE_ITEM_ID (state) {
+      state.lastVisibleItemId = []
+      state.viewportFocusItemId = null
     }
   },
   actions: {

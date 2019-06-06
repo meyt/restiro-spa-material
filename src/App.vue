@@ -49,7 +49,9 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import split from 'lodash/split'
-import { getResourceAnchor, updateFavicon, jumpToSection } from './helpers'
+import { getResourceAnchor, updateFavicon } from './helpers'
+import throttle from 'lodash/throttle'
+import sectionScrollMixin from './mixins/section-scroll'
 
 export default {
   name: 'App',
@@ -59,6 +61,7 @@ export default {
       drawer: true
     }
   },
+  mixins: [sectionScrollMixin],
   watch: {
     '$route.params' (newVal) {
       this.$store.commit('SET_SECTION', newVal.sectionName)
@@ -119,12 +122,19 @@ export default {
     this.$vuetify.rtl = this.isRtl
     updateFavicon('./restiro.png')
     this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
+
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
     formatGroupTitle (title) {
       return split(title, /(?=[A-Z])/g).join(' ')
     },
-    jumpToSection
+    onScroll: throttle(function () {
+      this.updateSection()
+    }, 100)
   }
 }
 </script>
