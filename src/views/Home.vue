@@ -2,12 +2,14 @@
   <div class="home">
     <h1 v-text="title" />
     <v-divider class="mb-4"/>
-    <template v-for="(item, index) in sortedResources">
-      <v-divider :key="index + 'divider'" class="mb-5" v-if="index > 0"/>
-      <resource
-        :key="index"
-        :value="item"
-      />
+    <template v-for="group in Object.keys(groupedResources).sort()">
+      <template v-for="(item, index) in groupedResources[group]">
+        <v-divider :key="index + 'divider'" class="mb-5" v-if="index > 0"/>
+        <resource
+          :key="index"
+          :value="item"
+        />
+      </template>
     </template>
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
   },
   computed: {
     ...mapState(['title']),
-    ...mapGetters(['sortedResources'])
+    ...mapGetters(['groupedResources'])
   }
 }
 </script>
