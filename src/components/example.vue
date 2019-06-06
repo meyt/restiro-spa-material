@@ -65,10 +65,10 @@ export default {
       return result.join('\n')
     },
     requestBody () {
-      if (this.value.request.body_format === 'json') {
-        return JSON.parse(this.value.request.body_text)
-      }
-      return this.value.request.body_text
+      const body = this.value.request.body
+      if (!body) return
+      if (this.value.request.body_format === 'json') return JSON.parse(body)
+      return body
     },
     responseHeaders () {
       const result = []
