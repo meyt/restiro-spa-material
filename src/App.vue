@@ -124,7 +124,15 @@ export default {
       : 'en'
     this.$vuetify.rtl = this.isRtl
     updateFavicon('./restiro.png')
-    this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
+
+    if (
+      !this.$route.params.sectionName ||
+      this.$route.params.sectionName === ''
+    ) {
+      this.$router.push(`/${this.drawerItems[0].child[0].anchor}`)
+    } else {
+      this.jumpToSection(this.$route.params.sectionName)
+    }
 
     window.addEventListener('scroll', this.onScroll)
   },
