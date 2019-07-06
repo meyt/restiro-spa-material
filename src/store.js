@@ -49,7 +49,9 @@ export default new Vuex.Store({
       data.forEach((item, index) => {
         item.id = index
       })
-      state.resources = data
+      state.resources = data.filter(
+        (o) => o.method.toLowerCase() !== 'options'
+      )
     },
     SET_TITLE (state, data) {
       state.title = data
