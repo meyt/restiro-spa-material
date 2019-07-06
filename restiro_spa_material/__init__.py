@@ -1,9 +1,13 @@
+import sys
 import json
 import errno
 import shutil
+import fileinput
+
+from uuid import uuid4
+from os.path import join, dirname
 
 from restiro.generators import BaseGenerator
-from os.path import join, dirname
 
 
 def copy(src, dest):
@@ -28,6 +32,12 @@ class SPAGenerator(BaseGenerator):
             'window.restiro_docs = %s' % json.dumps(self.docs_root.to_dict())
         )
         f.close()
+
+        # Prevent to cache docs.js file
+        docs_file = join(self.destination_dir, 'docs.js')
+        for line in fileinput.input(docs_file, inplace=True):
+            line = line.replace('"docs.js"', '"docs.js?v=%s"' % uuid4())
+            sys.stdout.write(line)
 
     def generate_documents(self):
         pass
