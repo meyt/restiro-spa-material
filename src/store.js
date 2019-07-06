@@ -10,7 +10,6 @@ export default new Vuex.Store({
     title: '',
     resources: [],
     locale: 'en_US',
-    keyword: '',
     section: '',
     lastVisibleItemId: [], // Used for intersection observer on lists
     viewportFocusItemId: null,
@@ -20,13 +19,6 @@ export default new Vuex.Store({
     groupedResources (state, getters) {
       const resultByGroup = {}
       getters.sortedResources.forEach((resource) => {
-        // Filter by keyword
-        if (
-          state.keyword.length > 0 &&
-          resource.display_name.toLowerCase().indexOf(
-            state.keyword.toLowerCase()
-          ) === -1
-        ) return
         const group = resource.tags[0] || 'general'
         if (typeof resultByGroup[group] === 'undefined') {
           resultByGroup[group] = [resource]
@@ -61,9 +53,6 @@ export default new Vuex.Store({
     },
     SET_SECTION (state, data) {
       state.section = data
-    },
-    SET_KEYWORD (state, data) {
-      state.keyword = data
     },
     SET_IS_DARK (state, data) {
       state.isDark = data

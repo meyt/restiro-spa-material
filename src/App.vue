@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       isDarkLocal: this.isDark,
-      drawer: true
+      drawer: true,
+      keyword: ''
     }
   },
   mixins: [sectionScrollMixin],
@@ -81,14 +82,6 @@ export default {
       'groupedResources',
       'isRtl'
     ]),
-    keyword: {
-      get () {
-        return this.$store.state.keyword
-      },
-      set (val) {
-        this.$store.commit('SET_KEYWORD', val)
-      }
-    },
     drawerItems () {
       const result = []
       Object.keys(this.groupedResources).sort().forEach((key) => {
@@ -98,6 +91,14 @@ export default {
           child: []
         }
         this.groupedResources[key].forEach(resource => {
+          // Filter by keyword
+          if (
+            this.keyword.length > 0 &&
+            resource.display_name.toLowerCase().indexOf(
+              this.keyword.toLowerCase()
+            ) === -1
+          ) return
+
           const anchor = getResourceAnchor(resource)
           group.child.push({
             title: resource.display_name,
@@ -109,6 +110,8 @@ export default {
             group.active = true
           }
         })
+
+        if (group.child.length === 0) return
         result.push(group)
       })
       return result
