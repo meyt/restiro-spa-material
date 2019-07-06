@@ -159,6 +159,8 @@ export default {
       return sortBy(
         this.value.examples,
         function (o) { return parseInt(o.response.status) }
+      ).filter(
+        (o) => o.visible
       )
     }
   },
