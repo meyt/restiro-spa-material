@@ -47,6 +47,7 @@
           <v-layout v-for="(item, index) in value[paramType[0]]" :key="index" >
             <v-flex sm12 md2 class="py-1">
               <b v-text="item.display_name || item.name" />
+              <span v-if="item.required" class="param-required">*</span>
               <div v-if="item.type" class="grey--text text--darken-1">
                 Type: {{ item.type }}
               </div>
