@@ -34,9 +34,9 @@ class SPAGenerator(BaseGenerator):
         f.close()
 
         # Prevent to cache docs.js file
-        docs_file = join(self.destination_dir, 'docs.js')
-        for line in fileinput.input(docs_file, inplace=True):
-            line = line.replace('"docs.js"', '"docs.js?v=%s"' % uuid4())
+        index_file = join(self.destination_dir, 'index.html')
+        for line in fileinput.input(index_file, inplace=True):
+            line = line.replace('docs.js', 'docs.js?v=%s' % uuid4())
             sys.stdout.write(line)
 
     def generate_documents(self):
