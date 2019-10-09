@@ -1,6 +1,6 @@
 {
   "name": "restiro-material-template",
-  "version": "0.10.2",
+  "version": "0.10.333
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
