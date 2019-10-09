@@ -20,7 +20,7 @@ setup(
     zip_safe=False,
     include_package_data=True,
     package_data={
-        'restiro_spa_material': 'dist/*'
+        'restiro_spa_material': ['dist/*']
     },
     packages=find_packages(),
     classifiers=[
